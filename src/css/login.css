@@ -1,0 +1,24 @@
+.login-wrapper {
+    height: 100vh;
+}
+
+.login-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.form-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #1e293b;
+}
+
+.hidden-wrapper {
+    position: relative;
+}
+
+.hidden-icon {
+    position: absolute;
+    right: 10px;
+}
