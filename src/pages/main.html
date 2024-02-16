@@ -10,13 +10,16 @@
 </head>
 <body>
     <div class="d-flex align-items-start">
+        <!-- Navs -->
         <div class="nav flex-column nav-pills me-3 p-5 sidebar" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button class="pill nav-link active" id="dashboard-tab" data-bs-toggle="pill" data-bs-target="#dashboard-content" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Dashboard</button>
           <button class="nav-link" id="fiscal-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Notas Fiscais</button>
-          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
-          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
+          <button class="nav-link" id="relatorios-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Relatórios</button>
+          <button class="nav-link" id="logout-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Logout</button>
         </div>
+        <!-- Nav Group -->
         <div class="d-flex flex-column container-fluid">
+            <!-- Top Navbar -->
             <div class="nav d-flex align-items-center justify-content-between p-4">
                 <span class="badge bg-primary">
                     <h4 id="nav-title" class="m-0">Dashboard</h4>
@@ -31,30 +34,75 @@
                     </div>
                     <div class="d-flex flex-column">
                         <h5 id="user-name" class="m-0">
-                            <strong></strong>
+                            <!-- Username -->
                         </h5>
                         <p id="user-role" class="m-0">
-                            
+                            <!-- Role -->
                         </p>
                     </div>
                 </div>
             </div>
+            <!-- Nav Content -->
             <div class="tab-content" id="v-pills-tabContent">
                 <!-- Dashboard -->
                 <div class="tab-pane fade show active" id="dashboard-content" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
                     
                 </div>
+                <!-- Invoices -->
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <span>here</span>
+                    <div class="container-fluid col-lg-4 col-md-8 col-sm-12 d-flex justify-content-center flex-column">
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="row d-flex align-items-center justify-content-center mt-4">
+                                <div class="col-lg-6 col-sm-12">
+                                    <label for="start-date">Data Inicial</label>
+                                    <input id="start-date" class="form-control" type="date"/>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <label for="end-date">Data Final</label>
+                                    <input id="end-date" class="form-control" type="date">
+                                </div>
+                            </div>
+                            <div class="btn-group py-4">
+                                <button id="btn-search" class="btn btn-primary">
+                                Pesquisar
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <div class="container-fluid d-flex flex-column gap-4 col-lg-12 col-md-8 col-sm-12 p-4">
+                        <div class="d-flex align-items-center justify-content-around">
+                            <span id="date-period">
+                                Notas Fiscais emitiadas no período:
+                            </span>
+                            <div class="checkbox d-flex align-items-center justify-content-center gap-2">
+                                <label>Status:</label>
+                                <select id="select-invoice" class="form-select" aria-label="Default select example">
+                                    <option>Todas</option>
+                                    <!-- Status options -->
+                                </select>
+                            </div>
+                        </div>
+                        <table id="invoice-list" class="table"> 
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Id Nota</th>
+                                    <th>Data Emissão</th>
+                                    <th>Data Cobrança</th>
+                                    <th>Data Pagamento</th>
+                                    <th>Doc. Nota</th>
+                                    <th>Doc. Boleto</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">Relatórios</div>
+              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Logout</div>
             </div>
         </div>
     </div>  

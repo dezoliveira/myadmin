@@ -3,7 +3,7 @@ const user = {
     role: 'Admin'
 }
 
-const notas = [
+let invoices = [
     {
         id: 1,
         nome: 'John Dee',
@@ -11,7 +11,7 @@ const notas = [
         dataEmissão: '01/01/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '25/02/2024',
-        docNota: '',
+        docNota: '386.822.670-20',
         docBoleto: '',
         status: 'Emitida',
     },
@@ -22,7 +22,7 @@ const notas = [
         dataEmissão: '02/06/2024',
         dataCobrança: '12/08/2024',
         dataPagamento: '',
-        docNota: '',
+        docNota: '404.223.800-91',
         docBoleto: '',
         status: 'Em Atraso',
     },
@@ -33,7 +33,7 @@ const notas = [
         dataEmissão: '01/01/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '03/02/2024',
-        docNota: '',
+        docNota: '838.815.220-34',
         docBoleto: '',
         status: 'Paga',
     },
@@ -44,7 +44,7 @@ const notas = [
         dataEmissão: '01/01/2024',
         dataCobrança: '02/06/2024',
         dataPagamento: '01/02/2024',
-        docNota: '',
+        docNota: '128.455.560-71',
         docBoleto: '',
         status: 'Paga',
     },
@@ -55,44 +55,145 @@ const notas = [
         dataEmissão: '01/01/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '25/02/2024',
-        docNota: '',
+        docNota: '429.509.680-66',
         docBoleto: '',
         status: 'Emitida',
     },
 ]
 
+const invoiceStatus = ['Paga', 'Emitida', 'Em Atraso']
+
+//variables
 const userName = document.getElementById('user-name')
 const userRole = document.getElementById('user-role')
 const navTitle = document.getElementById('nav-title')
 const navs = document.querySelectorAll('.nav-link')
+const invoiceList = document.querySelector('#invoice-list tbody')
+const selectInvoice = document.getElementById('select-invoice')
+
+//date
+const datePeriod = document.getElementById('date-period')
+const startDate = document.getElementById('start-date')
+const endDate = document.getElementById('end-date')
+
+const btnSearch = document.getElementById('btn-search')
+
+//onload
+window.onload = () => {
+    //user-info
+    userName.textContent = user.name
+    userRole.textContent = user.role
+
+    //select invoice status
+    for (let s in invoiceStatus)
+    selectInvoice.innerHTML += `
+        <option value="${invoiceStatus[s]}">
+            ${invoiceStatus[s]}
+        </option>
+    `
+
+    loadInvoices()
+}
+
+//Functions
+const loadInvoices = (newData) => {
+    data = invoices
+    
+    if (newData !== undefined) {
+        data = newData
+    }
+
+    //invoice list
+    invoiceList.innerHTML = ``
+
+    for (let i in data) {
+        let id = data[i].id
+        let nome = data[i].nome
+        let idNota = data[i].idNota
+        let dataEmissão = data[i].dataEmissão
+        let dataCobrança = data[i].dataCobrança
+        let dataPagamento = data[i].dataPagamento
+        let docNota = data[i].docNota
+        let docBoleto = data[i].docBoleto
+        let status = data[i].status
+
+        invoiceList.innerHTML += `
+            <tr id="${id}">
+                <td>${nome}</td>
+                <td>${idNota}</td>
+                <td>${dataEmissão}</td>
+                <td>${dataCobrança}</td>
+                <td>${dataPagamento}</td>
+                <td>${docNota}</td>
+                <td>${docBoleto}</td>
+                <td>${status}</td>
+            </tr>
+        `
+    }
+}
+
+const filterInvoices = (status) => {
+    let filteredInvoices = invoices.filter((invoice => {
+
+        if (status === 'Todas'){
+            return invoices
+        }
+
+        return invoice.status === status
+    }))
+
+    loadInvoices(filteredInvoices)
+}
+
+//Events
+
+//Nav Events
+navs.forEach((nav) => {
+    nav.addEventListener('click', () => {
+        let id = nav.id
+        let activeNav = id.split('-')[0]
+        navTitle.textContent = captalize(activeNav)
+
+        switch (activeNav) {
+            case 'logout':
+                location.href = '../../index.html'      
+        }
+    })
+})
+
+//Search
+btnSearch.addEventListener('click', (e) => {
+    e.preventDefault()
+    let startDateVal = startDate.value
+    let endDateVal = endDate.value
+
+    if (!startDateVal.length) {
+        alert('Digite a data inicial')
+        return
+    }
+
+    if (!endDateVal.length) {
+        alert('Digite a data final')
+        return
+    }
+
+    let arr1 = startDateVal.split('-')
+    let arr2 = endDateVal.split('-')
+
+    let newStartDate = arr1[2] + '/' + arr1[1] + '/' + arr1[0]
+    let newEndDate = arr2[2] + '/' + arr2[1] + '/' + arr2[0]
+
+    datePeriod.textContent = `Notas Fiscais emitiadas no período de: ${newStartDate} á ${newEndDate}`
+})
+
+//Status Change
+selectInvoice.addEventListener('change', (e) => {
+    let status = e.target.value
+    filterInvoices(status)
+})
 
 //Captaliza titulo da página
 const captalize = (value) => {
     newValue = value[0].toUpperCase() + value.slice(1)
     return newValue
-}   
-
-navs.forEach((nav) => {
-    nav.addEventListener('click', () => {
-        let id = nav.id
-        let title = id.split('-')[0]
-        navTitle.textContent = captalize(title)
-    })
-})
-
-console.log(navs)
-
-document.addEventListener('', () => {
-    console.log(ac)
-})
-
-// let newNavTitle = activeNav.id.split('-')
-// navTitle.textContent = newNavTitle[0]
-
-// console.log(newNavTitle[0])
-// console.log(navTitle)
-
-userName.textContent = user.name
-userRole.textContent = user.role
-
-console.log(notas)
+}
