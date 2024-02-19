@@ -8,7 +8,7 @@ let invoices = [
         id: 1,
         nome: 'John Dee',
         idNota: 999999,
-        dataEmissão: '01/01/2024',
+        dataEmissao: '01/01/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '25/02/2024',
         docNota: '386.822.670-20',
@@ -19,7 +19,7 @@ let invoices = [
         id: 2,
         nome: 'Bruce Wayne',
         idNota: 100001,
-        dataEmissão: '02/06/2024',
+        dataEmissao: '02/06/2023',
         dataCobrança: '12/08/2024',
         dataPagamento: '',
         docNota: '404.223.800-91',
@@ -30,7 +30,7 @@ let invoices = [
         id: 3,
         nome: 'Luke Skywalker',
         idNota: 912399,
-        dataEmissão: '01/01/2024',
+        dataEmissao: '01/03/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '03/02/2024',
         docNota: '838.815.220-34',
@@ -41,7 +41,7 @@ let invoices = [
         id: 4,
         nome: 'Peter Parker',
         idNota: 199991,
-        dataEmissão: '01/01/2024',
+        dataEmissao: '01/12/2023',
         dataCobrança: '02/06/2024',
         dataPagamento: '01/02/2024',
         docNota: '128.455.560-71',
@@ -52,7 +52,7 @@ let invoices = [
         id: 5,
         nome: 'Parris Hilton',
         idNota: 109990,
-        dataEmissão: '01/01/2024',
+        dataEmissao: '01/01/2024',
         dataCobrança: '01/03/2024',
         dataPagamento: '25/02/2024',
         docNota: '429.509.680-66',
@@ -110,7 +110,7 @@ const loadInvoices = (newData) => {
         let id = data[i].id
         let nome = data[i].nome
         let idNota = data[i].idNota
-        let dataEmissão = data[i].dataEmissão
+        let dataEmissao = data[i].dataEmissao
         let dataCobrança = data[i].dataCobrança
         let dataPagamento = data[i].dataPagamento
         let docNota = data[i].docNota
@@ -121,7 +121,7 @@ const loadInvoices = (newData) => {
             <tr id="${id}">
                 <td>${nome}</td>
                 <td>${idNota}</td>
-                <td>${dataEmissão}</td>
+                <td>${dataEmissao}</td>
                 <td>${dataCobrança}</td>
                 <td>${dataPagamento}</td>
                 <td>${docNota}</td>
@@ -184,6 +184,15 @@ btnSearch.addEventListener('click', (e) => {
     let newEndDate = arr2[2] + '/' + arr2[1] + '/' + arr2[0]
 
     datePeriod.textContent = `Notas Fiscais emitiadas no período de: ${newStartDate} á ${newEndDate}`
+
+    let filteredByData = invoices.filter((invoice) => {
+        return (
+            new Date(invoice.dataEmissao) >= new Date(startDateVal) && 
+            new Date(invoice.dataEmissao) <= new Date(endDateVal)
+        )
+    })
+
+    loadInvoices(filteredByData)
 })
 
 //Status Change
