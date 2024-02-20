@@ -23,6 +23,9 @@
 }
 
 .sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     height: 100vh;
     background-color: #1e293b;
 }

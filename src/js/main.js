@@ -61,6 +61,35 @@ let invoices = [
     },
 ]
 
+//Chart
+
+const ctx = document.getElementById('myChart');
+
+// const data = [1, 2, 3]
+let labels = ['Jan', 'Fev', 'Mar']
+
+const loadChart = () => {
+    ctx.innerHTML = ``
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '# of Votes',
+            data: data,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+}
+
 const invoiceStatus = ['Paga', 'Emitida', 'Em Atraso']
 
 //variables
@@ -93,6 +122,9 @@ window.onload = () => {
     `
 
     loadInvoices()
+
+    //chart
+    loadChart()
 }
 
 //Functions
@@ -193,6 +225,7 @@ btnSearch.addEventListener('click', (e) => {
     })
 
     loadInvoices(filteredByData)
+    labels = ['cu', 'cu', 'cu']
 })
 
 //Status Change

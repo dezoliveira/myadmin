@@ -46,7 +46,39 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <!-- Dashboard -->
                 <div class="tab-pane fade show active" id="dashboard-content" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
-                    
+                    <div class="container-fluid col-lg-4 col-md-8 col-sm-12 d-flex justify-content-center flex-column">
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="row d-flex align-items-center justify-content-center mt-4">
+                                <div class="col-lg-6 col-sm-12">
+                                    <label for="start-date">Data Inicial</label>
+                                    <input id="start-date" class="form-control" type="date"/>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <label for="end-date">Data Final</label>
+                                    <input id="end-date" class="form-control" type="date">
+                                </div>
+                            </div>
+                            <div class="btn-group py-4">
+                                <button id="btn-search" class="btn btn-primary">
+                                Pesquisar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-4 col-lg-10 col-md-10 col-sm-12 chart-container">
+                        <div>
+                            <h3>Quantidade de Notas emitidas no período</h3>
+                            <div>
+                                <canvas id="myChart" width="1000" height="400"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- <h3>Quantidade de Notas emitidas no período</h3>
+                            <div>
+                                <canvas id="myChart2" width="1000" height="400"></canvas>
+                            </div> -->
+                        </div>
+                    </div>
                 </div>
                 <!-- Invoices -->
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -107,6 +139,7 @@
         </div>
     </div>  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/main.js"></script>
 </body>    
 </body>
