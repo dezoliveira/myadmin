@@ -62,33 +62,28 @@ let invoices = [
 ]
 
 //Chart
-
 const ctx = document.getElementById('myChart');
-
-// const data = [1, 2, 3]
-let labels = ['Jan', 'Fev', 'Mar']
-
-const loadChart = () => {
-    ctx.innerHTML = ``
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: '# of Votes',
-            data: data,
-            borderWidth: 1
-          }]
+let chart = new Chart (ctx, {
+    type: 'line',
+    data: {
+        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        datasets:[{
+            label: "Gráfico de Notas Emitidas no Período",
+            data: [0, 10, 5, 15, 8, 1, 0, 0, 1, 95, 5, 0]
+        }]
+    },
+    options: {
+        legend: {
+            display: true,
+            position: 'bottom'
         },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
+
+        title: {
+            display: true,
+            text: 'Gráfico de Notas Emitidas no Período'
         }
-      });
-}
+    }
+})
 
 const invoiceStatus = ['Paga', 'Emitida', 'Em Atraso']
 
@@ -104,6 +99,27 @@ const selectInvoice = document.getElementById('select-invoice')
 const datePeriod = document.getElementById('date-period')
 const startDate = document.getElementById('start-date')
 const endDate = document.getElementById('end-date')
+
+let currentDate = new Date()
+let nextMonth = new Date(currentDate.setMonth(currentDate.getMonth() + 1))
+
+startDate.value = currentDate.toLocaleDateString()
+endDate.value = nextMonth.toLocaleDateString()
+
+const inputStartDate = document.getElementById('start-date')
+const inputEndDate = document.getElementById('end-date')
+
+inputStartDate.addEventListener('click', (e) => {
+    e.preventDefault()
+    startDate.setAttribute("type", 'date')
+    inputStartDate.showPicker()
+})
+
+inputEndDate.addEventListener('click', (e) => {
+    e.preventDefault()
+    endDate.setAttribute("type", 'date')
+    inputEndDate.showPicker()
+})
 
 const btnSearch = document.getElementById('btn-search')
 
@@ -124,7 +140,7 @@ window.onload = () => {
     loadInvoices()
 
     //chart
-    loadChart()
+    // loadChart()
 }
 
 //Functions
@@ -225,7 +241,8 @@ btnSearch.addEventListener('click', (e) => {
     })
 
     loadInvoices(filteredByData)
-    labels = ['cu', 'cu', 'cu']
+    chart.data.labels = ['cu']
+    chart.update()
 })
 
 //Status Change
