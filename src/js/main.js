@@ -100,50 +100,33 @@ const datePeriod = document.getElementById('date-period')
 const startDate = document.getElementById('start-date')
 const endDate = document.getElementById('end-date')
 
-let currentDate = new Date()
-let nextMonth = new Date(currentDate.setMonth(currentDate.getMonth() + 1))
-
-startDate.value = currentDate.toLocaleDateString()
-endDate.value = nextMonth.toLocaleDateString()
-
-const inputStartDate = document.getElementById('start-date')
-const inputEndDate = document.getElementById('end-date')
-
-inputStartDate.addEventListener('click', (e) => {
-    e.preventDefault()
-    startDate.setAttribute("type", 'date')
-    inputStartDate.showPicker()
-})
-
-inputEndDate.addEventListener('click', (e) => {
-    e.preventDefault()
-    endDate.setAttribute("type", 'date')
-    inputEndDate.showPicker()
-})
-
 const btnSearch = document.getElementById('btn-search')
 
-//onload
-window.onload = () => {
-    //user-info
-    userName.textContent = user.name
-    userRole.textContent = user.role
+//Functions
+const loadDate = () => {
+    let dateNow = new Date()
+    let currentDate = new Date()
+    let nextMonth = new Date(currentDate.setMonth(currentDate.getMonth() + 1))
 
-    //select invoice status
-    for (let s in invoiceStatus)
-    selectInvoice.innerHTML += `
-        <option value="${invoiceStatus[s]}">
-            ${invoiceStatus[s]}
-        </option>
-    `
+    startDate.value = dateNow.toLocaleDateString()
+    endDate.value = nextMonth.toLocaleDateString()
 
-    loadInvoices()
+    const inputStartDate = document.getElementById('start-date')
+    const inputEndDate = document.getElementById('end-date')
 
-    //chart
-    // loadChart()
+        inputStartDate.addEventListener('click', (e) => {
+            e.preventDefault()
+            startDate.setAttribute("type", 'date')
+            inputStartDate.showPicker()
+        })
+
+        inputEndDate.addEventListener('click', (e) => {
+            e.preventDefault()
+            endDate.setAttribute("type", 'date')
+            inputEndDate.showPicker()
+        })
 }
 
-//Functions
 const loadInvoices = (newData) => {
     data = invoices
     
@@ -193,6 +176,29 @@ const filterInvoices = (status) => {
     loadInvoices(filteredInvoices)
 }
 
+//onload
+window.onload = () => {
+    //load Data Inputs
+    loadDate()
+    
+    //user-info
+    userName.textContent = user.name
+    userRole.textContent = user.role
+
+    //select invoice status
+    for (let s in invoiceStatus)
+    selectInvoice.innerHTML += `
+        <option value="${invoiceStatus[s]}">
+            ${invoiceStatus[s]}
+        </option>
+    `
+
+    loadInvoices()
+
+    //chart
+    // loadChart()
+}
+
 //Events
 
 //Nav Events
@@ -209,19 +215,36 @@ navs.forEach((nav) => {
     })
 })
 
+const legendMonth = (arr) => {
+    console.log(arr)
+    let months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    
+    let filteredMonths = arr.map((a) => {
+        if(months[a] !== undefined) {
+            return months[a]
+        }
+    })
+    return filteredMonths
+}
+
 //Search
 btnSearch.addEventListener('click', (e) => {
-    e.preventDefault()
+    startDate.setAttribute("type", 'date')
+    endDate.setAttribute("type", 'date')
+    
+    // e.preventDefault()
     let startDateVal = startDate.value
     let endDateVal = endDate.value
 
     if (!startDateVal.length) {
         alert('Digite a data inicial')
+        startDate.showPicker()
         return
     }
 
     if (!endDateVal.length) {
         alert('Digite a data final')
+        endDate.showPicker()
         return
     }
 
@@ -241,7 +264,23 @@ btnSearch.addEventListener('click', (e) => {
     })
 
     loadInvoices(filteredByData)
-    chart.data.labels = ['cu']
+
+    let startDateMonth = new Date(startDate.value + 1).getMonth()
+    let endDateMonth = new Date(endDate.value).getMonth()
+    let arrMonth = []
+
+    console.log('startDateVal', startDateVal)
+    console.log('startDateMonth', startDateMonth)
+    console.log('endDateVal', endDateVal)
+    console.log('startDateMonth', endDateMonth)
+
+    for (let i=startDateMonth; i <= endDateMonth; i++){
+        arrMonth.push(i)
+    }
+
+    let x = legendMonth(arrMonth)
+
+    chart.data.labels = x
     chart.update()
 })
 
