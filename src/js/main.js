@@ -100,7 +100,28 @@ const datePeriod = document.getElementById('date-period')
 const startDate = document.getElementById('start-date')
 const endDate = document.getElementById('end-date')
 
+//buttons
 const btnSearch = document.getElementById('btn-search')
+const btnHamburger = document.getElementById('btn-hamburger')
+
+btnHamburger.addEventListener('click', () => {
+    let sidebar = document.querySelector('.sidebar')
+    let tabContent = document.querySelector('.tab-content')
+    let hamburger = document.getElementById('btn-hamburger')
+    let burgerIcon = document.querySelector('.fa-bars')
+    
+    tabContent.style.zIndex = -1
+    sidebar.style.zIndex = 1
+    hamburger.style.zIndex = 1
+    
+    sidebar.classList.remove('hide')
+    sidebar.classList.add('show')
+
+    burgerIcon.classList.remove('fa-bars')
+    burgerIcon.classList.add('fa-close')
+
+    hamburger.style.color = '#fff'
+})
 
 //Functions
 const loadDate = () => {

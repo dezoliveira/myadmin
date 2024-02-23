@@ -11,20 +11,24 @@
 <body>
     <div class="d-flex align-items-start">
         <!-- Navs -->
-        <div class="nav flex-column nav-pills me-3 p-5 sidebar" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <!-- <div class="nav flex-column nav-pills me-3 p-5 sidebar d-none d-sm-block" id="v-pills-tab" role="tablist" aria-orientation="vertical"> -->
+        <div class="nav flex-column nav-pills me-3 p-5 sidebar hide" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button class="pill nav-link active" id="dashboard-tab" data-bs-toggle="pill" data-bs-target="#dashboard-content" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Dashboard</button>
           <button class="nav-link" id="fiscal-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Notas Fiscais</button>
           <button class="nav-link" id="relatorios-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Relatórios</button>
           <button class="nav-link" id="logout-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Logout</button>
         </div>
+        <div id="btn-hamburger" class="d-flex d-block d-sm-none btn-hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
         <!-- Nav Group -->
         <div class="d-flex flex-column container-fluid">
             <!-- Top Navbar -->
-            <div class="nav d-flex align-items-center justify-content-between p-4">
+            <div class="nav d-flex align-items-center justify-content-between p-4 gap-4">
                 <span class="badge bg-primary">
                     <h4 id="nav-title" class="m-0">Dashboard</h4>
                 </span>
-                <div class="d-flex gap-3 justify-content-between">
+                <div class="d-flex gap-3 justify-content-between d-none d-sm-flex">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </div>

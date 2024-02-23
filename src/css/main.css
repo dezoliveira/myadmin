@@ -46,3 +46,27 @@ button.nav-link {
     border-radius: 50%;
     object-fit: cover;
 }
+
+.btn-hamburger {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    z-index: 9999;
+    display: block;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    font-size: xx-large;
+    gap: 20px;
+}
