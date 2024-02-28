@@ -28,6 +28,7 @@
     top: 0;
     height: 100vh;
     background-color: #1e293b;
+    z-index: 1;
 }
 
 button.nav-link {
@@ -59,14 +60,13 @@ button.nav-link {
     display: none;
 }
 
-.show {
+.show-burger {
     z-index: 9999;
-    display: block;
     width: 100%;
     position: fixed;
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    font-size: xx-large;
+    /* font-size: xx-large; */
     gap: 20px;
 }

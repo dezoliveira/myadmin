@@ -104,26 +104,26 @@ const endDate = document.getElementById('end-date')
 const btnSearch = document.getElementById('btn-search')
 const btnHamburger = document.getElementById('btn-hamburger')
 
-btnHamburger.addEventListener('click', () => {
-    let sidebar = document.querySelector('.sidebar')
-    let tabContent = document.querySelector('.tab-content')
-    let hamburger = document.getElementById('btn-hamburger')
-    let burgerIcon = document.querySelector('.fa-bars')
-    
-    tabContent.style.zIndex = -1
-    sidebar.style.zIndex = 1
-    hamburger.style.zIndex = 1
-    
-    sidebar.classList.remove('hide')
-    sidebar.classList.add('show')
-
-    burgerIcon.classList.remove('fa-bars')
-    burgerIcon.classList.add('fa-close')
-
-    hamburger.style.color = '#fff'
-})
+let sidebar = document.querySelector('.sidebar')
+let tabContent = document.querySelector('.tab-content')
+let hamburger = document.getElementById('btn-hamburger')
+let burgerIcon = document.querySelector('.fa-bars')
 
 //Functions
+// const isMediaMatch = () => {
+//     let sidebar = document.querySelector('.sidebar')
+//     if (window.matchMedia("(max-width: 400px)").matches) {
+//         alert('cu')
+//         sidebar.classList.remove('hide')
+//         sidebar.classList.add('show')
+//     }  else {
+//         sidebar.classList.add('hide')
+//         sidebar.classList.remove('show')
+//     }
+// }
+
+// isMediaMatch()
+
 const loadDate = () => {
     let dateNow = new Date()
     let currentDate = new Date()
@@ -196,6 +196,30 @@ const filterInvoices = (status) => {
 
     loadInvoices(filteredInvoices)
 }
+
+//Captaliza titulo da página
+const captalize = (value) => {
+    newValue = value[0].toUpperCase() + value.slice(1)
+    return newValue
+}
+
+const isMediaMatch = () => {
+    const defaultMedia = '768px'
+
+    if (window.matchMedia(`(max-width: ${defaultMedia})`).matches) {
+        sidebar.classList.add('hide')
+    } else {
+        sidebar.classList.remove('hide')
+    }
+}
+
+//window events
+window.addEventListener('resize', (e) => {
+    e.preventDefault()
+    isMediaMatch()
+})
+
+isMediaMatch()
 
 //onload
 window.onload = () => {
@@ -311,8 +335,29 @@ selectInvoice.addEventListener('change', (e) => {
     filterInvoices(status)
 })
 
-//Captaliza titulo da página
-const captalize = (value) => {
-    newValue = value[0].toUpperCase() + value.slice(1)
-    return newValue
-}
+btnHamburger.addEventListener('click', () => {    
+    if (sidebar.classList.contains('hide')) {
+        tabContent.style.zIndex = -1
+        sidebar.style.zIndex = 1
+        sidebar.style.fontSize = 'xx-large'
+        hamburger.style.zIndex = 1
+        
+        sidebar.classList.remove('hide')
+        sidebar.classList.add('show-burger')
+    
+        burgerIcon.classList.remove('fa-bars')
+        burgerIcon.classList.add('fa-close')
+    
+        hamburger.style.color = '#fff'
+    } else {
+        sidebar.classList.remove('show-burger')
+        sidebar.classList.add('hide')
+        sidebar.style.fontSize = 'medium'
+
+        burgerIcon.classList.remove('fa-close')
+        burgerIcon.classList.add('fa-bars')
+
+        hamburger.style.color = "black"
+    }
+    
+})
