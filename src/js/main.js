@@ -75,13 +75,17 @@ let chart = new Chart (ctx, {
     options: {
         legend: {
             display: true,
-            position: 'bottom'
+            position: 'bottom',
         },
 
         title: {
             display: true,
             text: 'Gráfico de Notas Emitidas no Período'
-        }
+        },
+
+        //responsivity
+        responsive: true,
+        maintainAspectRatio: false
     }
 })
 
@@ -110,20 +114,6 @@ let hamburger = document.getElementById('btn-hamburger')
 let burgerIcon = document.querySelector('.fa-bars')
 
 //Functions
-// const isMediaMatch = () => {
-//     let sidebar = document.querySelector('.sidebar')
-//     if (window.matchMedia("(max-width: 400px)").matches) {
-//         alert('cu')
-//         sidebar.classList.remove('hide')
-//         sidebar.classList.add('show')
-//     }  else {
-//         sidebar.classList.add('hide')
-//         sidebar.classList.remove('show')
-//     }
-// }
-
-// isMediaMatch()
-
 const loadDate = () => {
     let dateNow = new Date()
     let currentDate = new Date()
@@ -211,6 +201,8 @@ const isMediaMatch = () => {
     } else {
         sidebar.classList.remove('hide')
     }
+
+    chart.update()
 }
 
 //window events
