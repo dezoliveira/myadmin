@@ -198,6 +198,7 @@ const isMediaMatch = () => {
 
     if (window.matchMedia(`(max-width: ${defaultMedia})`).matches) {
         sidebar.classList.add('hide')
+        return true
     } else {
         sidebar.classList.remove('hide')
     }
@@ -241,6 +242,17 @@ window.onload = () => {
 //Nav Events
 navs.forEach((nav) => {
     nav.addEventListener('click', () => {
+        if(isMediaMatch()) {
+            sidebar.classList.remove('show-burger')
+            sidebar.classList.add('hide')            
+            sidebar.style.fontSize = 'medium'
+
+            burgerIcon.classList.remove('fa-close')
+            burgerIcon.classList.add('fa-bars')
+    
+            hamburger.style.color = "black"
+        }
+
         let id = nav.id
         let activeNav = id.split('-')[0]
         navTitle.textContent = captalize(activeNav)
